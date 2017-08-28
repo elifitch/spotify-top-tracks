@@ -1,0 +1,28 @@
+{
+  "name": "spotify-charts",
+  "version": "0.0.1",
+  "description": "Get Spotify's top songs by country from https://SpotifyCharts.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "spotify",
+    "charts",
+    "songs",
+    "top songs",
+    "top tracks"
+  ],
+  "author": "Eli Fitch <eli.wtf>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "camelcase": "^4.1.0",
+    "csvtojson": "^1.1.7",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}
