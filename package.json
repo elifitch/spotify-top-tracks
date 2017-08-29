@@ -1,6 +1,6 @@
 {
   "name": "spotify-top-tracks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get Spotify's top songs by country from https://SpotifyCharts.com",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,10 @@
     "top tracks"
   ],
   "author": "Eli Fitch <eli.wtf>",
+  "repository" :{ 
+    "type" : "git", 
+    "url" : "https://github.com/elifitch/spotify-top-tracks.git"
+  },
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.0",

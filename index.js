@@ -11,6 +11,16 @@ module.exports = function spotifyCharts({
     request = requestPromise
 }) {
 
+    const cleanLocaleData = locales.map(locale => {
+      if (locale.daily === undefined) {
+        const defaultLocale = defaultData.find(defaultLocale => defaultLocale.id === locale.id);
+        if (defaultLocale) {
+          locale.daily = defaultLocale.daily;
+        }
+      }
+      return locale
+    });
+
     function renameHeaders(csv) {
         const splitCsv = csv.split('\n');
         splitCsv[0] = splitCsv[0].split(',').map(key => {
@@ -31,7 +41,7 @@ module.exports = function spotifyCharts({
         });
     }
     
-    return Promise.all(locales.map(locale => {
+    return Promise.all(cleanLocaleData.map(locale => {
         let requestUrl = '';
         if (locale.daily) {
             requestUrl = dailyUrl(locale.id);
