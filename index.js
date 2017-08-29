@@ -8,12 +8,13 @@ module.exports = function spotifyCharts({
     dailyUrl = (id) => `https://spotifycharts.com/regional/${id}/daily/latest/download`, 
     weeklyUrl = (id) => `https://spotifycharts.com/regional/${id}/weekly/latest/download`, 
     locales = defaultLocales,
-    request = requestPromise
+    request = requestPromise,
+    limit = -1
 }) {
 
     const cleanLocaleData = locales.map(locale => {
       if (locale.daily === undefined) {
-        const defaultLocale = defaultData.find(defaultLocale => defaultLocale.id === locale.id);
+        const defaultLocale = defaultLocales.find(defaultLocale => defaultLocale.id === locale.id);
         if (defaultLocale) {
           locale.daily = defaultLocale.daily;
         }
@@ -51,9 +52,15 @@ module.exports = function spotifyCharts({
         return request(requestUrl).then(processResponse).then(data => {
             // catching problems if HTML sneaks through
             if (!data[0]['<!doctypeHtml>']) {
+                const delimitedData = data.reduce((delimitedData, song) => {
+                    if (limit < 1 || delimitedData.length < limit) {
+                        delimitedData.push(song);
+                    }
+                    return delimitedData;
+                }, []);
                 return {
                     id: locale.id,
-                    chart: data
+                    chart: delimitedData
                 }
             }
         });

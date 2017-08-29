@@ -36,17 +36,18 @@ The main argument you'll be concerned with in general use is `locales`.  If left
 const onlyGlobalAndNicaragua = [
     {
         id: "global",
-        daily: true
+        daily: false
     },
     {
-        id: "ni",
-        daily: false
+        id: "ni"
     }
 ];
 
 spotifyTopTracks({
     // extended explanation above
     locales: onlyGlobalAndNicaragua,
+    // only return the top 5 tracks
+    limit: 5,
     // A function that returns a URL to download the daily top tracks from a certain country
     dailyUrl: (id) => `https://spotifycharts.com/regional/${id}/daily/latest/download`, 
     // A function that returns a URL to download the weekly top tracks from a certain country
