@@ -1,5 +1,5 @@
 const csv = require('csvtojson');
-const request = require('request-promise');
+const requestPromise = require('request-promise');
 const camelcase = require('camelcase');
 const Promise = require('bluebird');
 const defaultLocales = require('./default-locales');
@@ -7,7 +7,8 @@ const defaultLocales = require('./default-locales');
 module.exports = function spotifyCharts({
     dailyUrl = (id) => `https://spotifycharts.com/regional/${id}/daily/latest/download`, 
     weeklyUrl = (id) => `https://spotifycharts.com/regional/${id}/weekly/latest/download`, 
-    locales = defaultLocales
+    locales = defaultLocales,
+    request = requestPromise
 }) {
 
     function renameHeaders(csv) {
@@ -53,4 +54,3 @@ module.exports = function spotifyCharts({
         }, {});
     });
 }
-
