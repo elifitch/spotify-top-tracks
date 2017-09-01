@@ -9,7 +9,8 @@ module.exports = function spotifyCharts({
     weeklyUrl = (id) => `https://spotifycharts.com/regional/${id}/weekly/latest/download`, 
     locales = defaultLocales,
     request = requestPromise,
-    limit = -1
+    limit = -1,
+    overrideLimit = {}
 }) {
 
     const cleanLocaleData = locales.map(locale => {
@@ -52,8 +53,10 @@ module.exports = function spotifyCharts({
         return request(requestUrl).then(processResponse).then(data => {
             // catching problems if HTML sneaks through
             if (!data[0]['<!doctypeHtml>']) {
+                // allows specific limits per locale
+                const localeLimit = overrideLimit[locale.id] || limit;
                 const delimitedData = data.reduce((delimitedData, song) => {
-                    if (limit < 1 || delimitedData.length < limit) {
+                    if (localeLimit < 1 || delimitedData.length < localeLimit) {
                         delimitedData.push(song);
                     }
                     return delimitedData;

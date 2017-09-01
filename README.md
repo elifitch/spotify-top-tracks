@@ -48,6 +48,10 @@ spotifyTopTracks({
     locales: onlyGlobalAndNicaragua,
     // only return the top 5 tracks
     limit: 5,
+    // Override limit on a per locale basis
+    overrideLimit: {
+        global: -1
+    },
     // A function that returns a URL to download the daily top tracks from a certain country
     dailyUrl: (id) => `https://spotifycharts.com/regional/${id}/daily/latest/download`, 
     // A function that returns a URL to download the weekly top tracks from a certain country

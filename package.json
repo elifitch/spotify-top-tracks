@@ -1,6 +1,6 @@
 {
   "name": "spotify-top-tracks",
-  "version": "0.1.2",
+  "version": "0.2.2",
   "description": "Get Spotify's top songs by country from https://SpotifyCharts.com",
   "main": "index.js",
   "scripts": {
